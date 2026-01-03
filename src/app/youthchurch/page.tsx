@@ -608,71 +608,59 @@ function ExecutivesSection() {
         </motion.p>
 
         {/* <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-8"> */}
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
           {executives.map((exec, index) => (
             <motion.div
               key={exec.name}
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
-                duration: 0.7,
-                delay: index * 0.1,
+                duration: 0.6,
+                delay: index * 0.08,
                 ease: [0.42, 0, 0.58, 1],
               }}
               viewport={{ once: true }}
               whileHover={{
-                scale: 1.05,
-                y: -10,
-                transition: { duration: 0.5, ease: [0.42, 0, 0.58, 1] },
+                scale: 1.04,
+                y: -6,
               }}
               className="relative group"
             >
               <div
-                className={`h-80 rounded-3xl bg-gradient-to-br ${exec.color} p-1 flex flex-col justify-end shadow-xl overflow-hidden`}
+                className={`relative h-64 sm:h-72 lg:h-80
+        rounded-3xl bg-gradient-to-br ${exec.color}
+        p-1 shadow-xl overflow-hidden`}
               >
-                {/* <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-500 ease-in rounded-3xl" /> */}
-
+                {/* Image */}
                 <img
                   src={exec.src}
-                  alt="Leaders"
-                  className="absolute inset-0 object-cover h-full w-full rounded-3xl"
+                  alt={exec.name}
+                  className="absolute inset-0 w-full h-full object-cover rounded-3xl"
                 />
 
-                <div className="relative z-10">
+                {/* Overlay for readability */}
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition duration-500 rounded-3xl" />
+
+                {/* Text */}
+                <div className="relative z-10 p-4 sm:p-6">
                   <motion.h3
-                    className="text-3xl font-bold text-black/80 mb-2"
-                    initial={{ opacity: 0, x: -20 }}
+                    className="text-xl sm:text-2xl font-bold text-white mb-1"
+                    initial={{ opacity: 0, x: -15 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.3 + index * 0.1,
-                      duration: 0.6,
-                      ease: [0.42, 0, 0.58, 1],
-                    }}
+                    transition={{ delay: 0.2 + index * 0.05 }}
                   >
                     {exec.name}
                   </motion.h3>
+
                   <motion.p
-                    className="text-xl text-black font-semibold"
-                    initial={{ opacity: 0, x: -20 }}
+                    className="text-sm sm:text-lg text-white/90 font-semibold"
+                    initial={{ opacity: 0, x: -15 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.4 + index * 0.1,
-                      duration: 0.6,
-                      ease: [0.42, 0, 0.58, 1],
-                    }}
+                    transition={{ delay: 0.3 + index * 0.05 }}
                   >
                     {exec.role}
                   </motion.p>
                 </div>
-
-                {/* <motion.div
-                  className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm"
-                  whileHover={{
-                    scale: 1.2,
-                    rotate: 180,
-                    transition: { duration: 0.7, ease: [0.42, 0, 0.58, 1] },
-                  }}
-                /> */}
               </div>
             </motion.div>
           ))}
@@ -706,7 +694,7 @@ export default function YouthChurch() {
       time: "Time to be announced",
       location: "Main Church Hall",
       description:
-        "A refreshing and empowering service designed to renew strength, rekindle passion, and inspire believers for effective Christian service.",
+        "A refreshing and empowering service designed to renew strength, rekindle passion, and inspire believers for effective Christian living.",
       color: "from-pink-500 to-amber-500",
       images: [
         "https://ik.imagekit.io/jale/rtc1.jpg",

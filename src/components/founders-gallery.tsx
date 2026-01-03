@@ -65,6 +65,14 @@ export default function FoundersGallery() {
     setCurrentIndex((prev) => (prev - 1 + founders.length) % founders.length);
   };
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <div className="relative max-w-5xl mx-auto">
       <div
@@ -77,7 +85,8 @@ export default function FoundersGallery() {
 
           return (
             <div
-              key={`${founder.id}-${animationKey}`}
+              // key={`${founder.id}-${animationKey}`}
+              key={founder.id}
               className="absolute inset-0 transition-all duration-[1500ms] ease-in-out"
               style={{
                 transform: isActive
@@ -90,13 +99,20 @@ export default function FoundersGallery() {
                 transformStyle: "preserve-3d",
               }}
             >
-              <div className="h-full border-2 border-white/20 shadow-2xl backdrop-blur-sm bg-white/95 overflow-hidden rounded-lg">
+              <div className=" border-2 border-white/20 shadow-2xl backdrop-blur-sm bg-white/95 overflow-hidden rounded-lg">
                 <div className="p-0 h-full">
-                  <div className="grid md:grid-cols-2 h-full">
+                  <div className="grid grid-cols-1 md:grid-cols-2 h-full">
                     {/* Image Side */}
-                    <div className="relative bg-gradient-to-br from-purple-100 to-pink-100 overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center p-8">
-                        <div className="relative w-64 h-64 rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                    <div
+                      className="relative bg-gradient-to-br from-purple-100 to-pink-100 overflow-hidden
+                  h-64 sm:h-80 md:h-auto"
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8">
+                        <div
+                          className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64
+                      rounded-full overflow-hidden border-4 sm:border-6 md:border-8
+                      border-white shadow-2xl"
+                        >
                           <Image
                             src={founder.image || "/placeholder.svg"}
                             alt={founder.name}
@@ -105,25 +121,49 @@ export default function FoundersGallery() {
                           />
                         </div>
                       </div>
-                      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-900/50 to-transparent" />
+                      <div
+                        className="absolute bottom-0 left-0 right-0 h-24 sm:h-28 md:h-32
+                    bg-gradient-to-t from-purple-900/50 to-transparent"
+                      />
                     </div>
 
                     {/* Content Side */}
-                    <div className="flex flex-col justify-center p-8 md:p-12">
-                      <div className="inline-block px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-purple-500 text-white font-semibold text-sm mb-4 self-start">
+                    <div
+                      className="flex flex-col justify-center
+                        p-6 sm:p-8 md:p-12 text-center md:text-left"
+                    >
+                      <div
+                        className="inline-block px-3 py-1 sm:px-4 sm:py-1
+                        rounded-full bg-gradient-to-r from-amber-400 to-purple-500
+                        text-white font-semibold text-xs sm:text-sm
+                        mb-4 mx-auto md:mx-0"
+                      >
                         {founder.years}
                       </div>
-                      <h3 className="text-4xl font-bold mb-2 text-purple-900">
+
+                      <h3
+                        className="text-2xl sm:text-3xl md:text-4xl
+                        font-bold mb-2 text-purple-900"
+                      >
                         {founder.name}
                       </h3>
-                      <p className="text-xl text-purple-600 font-semibold mb-6">
+
+                      <p
+                        className="text-lg sm:text-xl
+                       text-purple-600 font-semibold mb-4 sm:mb-6"
+                      >
                         {founder.title}
                       </p>
-                      <p className="text-lg text-gray-700 leading-relaxed italic">
+
+                      <p
+                        className="text-base sm:text-lg
+                      text-gray-700 leading-relaxed italic"
+                      >
                         "{founder.description}"
                       </p>
-                      <div className="mt-8 pt-6 border-t border-purple-200">
-                        <p className="text-sm text-purple-600 font-medium">
+
+                      <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-purple-200">
+                        <p className="text-xs sm:text-sm text-purple-600 font-medium">
                           In loving memory of their faithful service
                         </p>
                       </div>

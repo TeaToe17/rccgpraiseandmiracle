@@ -56,7 +56,7 @@ export default function TitheOfferingSection() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 mb-6">
             <DollarSign className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 h-14 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             Give with Joy
           </h2>
           <p className="text-lg text-purple-700 max-w-2xl mx-auto leading-relaxed">

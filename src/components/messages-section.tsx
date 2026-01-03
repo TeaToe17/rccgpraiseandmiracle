@@ -118,7 +118,7 @@ export default function MessagesSection() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 h-26 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             Recent Messages
           </h2>
           <p className="text-lg text-purple-700 max-w-2xl mx-auto">

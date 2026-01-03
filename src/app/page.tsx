@@ -82,7 +82,7 @@ export default function Home() {
       {/* Upcoming Programs */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold text-center mb-4 h-14 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold text-center mb-4 h-26 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             Upcoming Programs
           </h2>
           <p className="text-center text-lg text-purple-700 mb-12">

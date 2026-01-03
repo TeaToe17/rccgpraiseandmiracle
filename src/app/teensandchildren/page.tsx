@@ -55,7 +55,7 @@ function TeensHeroCarousel() {
           <img
             src={`${heroImages[currentIndex].src}?tr=w-1200,f-auto`}
             alt="Hero slide"
-            className="absolute mt-20 w-full max-h-full object-cover rounded-2xl shadow-2xl"
+            className="absolute mt-20 w-full px-2 max-h-full object-cover rounded-2xl shadow-2xl"
           />
         </motion.div>
       </AnimatePresence>

@@ -51,7 +51,7 @@ export default function FoundersGallery() {
       setAnimationKey((prev) => prev + 1);
       setCurrentIndex((prev) => (prev + 1) % founders.length);
     }, 6000);
-
+  
     return () => clearInterval(timer);
   }, []);
 

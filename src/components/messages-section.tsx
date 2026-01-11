@@ -65,7 +65,7 @@ const sermonMessages: SermonMessage[] = [
     title: "Gainful grace",
     speaker: "Pastor Lanre Aiyedun",
     date: "November 10, 2024",
-    duration: "39:",
+    duration: "01:00:48",
     mp3Url:
       "https://archive.org/download/gainful-grace-pst.-lanre-aiyedun-14-th-december-2025/GAINFUL%20GRACE%20%20PST.%20LANRE%20AIYEDUN%20%2014TH%20DECEMBER%2C%202025.mp3",
   },

@@ -1,27 +1,31 @@
+import React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const _inter = Inter({ subsets: ["latin"] });
+const _outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "RCCG, Praise & Miracle",
-  description: "RCCG, Praise & Miracle",
+  title: "RCCG, Praise and Miracle Parish",
+  description: "RCCG, Praise and Miracle Parish",
   icons: {
-    icon: "/rccg-logo.png",
-    shortcut: "/rccg-logo.png",
-    apple: "/rccg-logo.png",
+    icon: [
+      {
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/apple-icon.png",
   },
 };
 
@@ -32,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`font-sans antialiased`}>
         <Navbar />
         {children}
         <Footer />

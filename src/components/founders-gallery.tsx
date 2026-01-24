@@ -6,12 +6,12 @@ import Image from "next/image";
 const founders = [
   {
     id: 1,
-    name: "Pastor & (Pastor) Mrs Oluwalana",
+    name: "Pastor & (Pastor) Mrs Oladokun",
     title: "Founding Pastors",
-    years: "",
+    years: "2004 - 2015",
     description:
       "A visionary couple whose faith, obedience, and unity laid a strong spiritual foundation for the church, serving faithfully with a shared commitment to family, service, and ministry.",
-    image: "/african-senior-pastor-in-formal-attire.jpg",
+    image: "https://ik.imagekit.io/jale/P%20OLADOKUN.png",
   },
   {
     id: 2,
@@ -51,7 +51,7 @@ export default function FoundersGallery() {
       setAnimationKey((prev) => prev + 1);
       setCurrentIndex((prev) => (prev + 1) % founders.length);
     }, 6000);
-  
+
     return () => clearInterval(timer);
   }, []);
 

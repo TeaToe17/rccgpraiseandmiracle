@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   try {
     const { channelType, link, password } = await request.json();
 
-    const ADMIN_PASSWORD = "rccglive2024";
+    const ADMIN_PASSWORD = "rccgpm2026";
 
     if (password !== ADMIN_PASSWORD) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });

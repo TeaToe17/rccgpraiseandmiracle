@@ -22,6 +22,7 @@ export async function POST(request: Request) {
   try {
     const { channelType, link, password } = await request.json();
 
+    
     const ADMIN_PASSWORD = "rccgpm2026";
 
     if (password !== ADMIN_PASSWORD) {

@@ -11,7 +11,7 @@ interface StreamChannel {
   link: string;
 }
 
-const ADMIN_PASSWORD = "rccglive2024";
+const ADMIN_PASSWORD = "rccgpm2026";
 
 export default function LiveStreamSection() {
   const [videoChannel, setVideoChannel] = useState<StreamChannel>({

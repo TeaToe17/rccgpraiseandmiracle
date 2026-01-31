@@ -6,6 +6,7 @@ import FoundersGallery from "@/components/founders-gallery";
 import HouseFellowshipTable from "@/components/house-fellowship-table";
 import MessagesSection from "@/components/messages-section";
 import TitheOfferingSection from "@/components/tithe-offering-section";
+import LiveStreamSection from "@/components/live-stream-section"
 
 export default function Home() {
   const programs = [
@@ -96,6 +97,8 @@ export default function Home() {
       <ParallaxSection variant="weekday" />
 
       <MessagesSection />
+
+      <LiveStreamSection/>
 
       <TitheOfferingSection />
 

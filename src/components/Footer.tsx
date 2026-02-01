@@ -31,11 +31,6 @@ export default function Footer() {
       icon: <Instagram />,
       link: "https://www.instagram.com/praiseandmiracle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
     },
-    // {
-    //   name: "Twitter",
-    //   icon: "🐦",
-    //   link: "https://www.instagram.com/praiseandmiracle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-    // },
     {
       name: "YouTube",
       icon: <Youtube />,
@@ -140,34 +135,35 @@ export default function Footer() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: [0.42, 0, 0.58, 1] }}
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
             <h4 className="text-xl font-bold mb-6">Connect With Us</h4>
             <div className="flex gap-4 mb-8">
               {socialLinks.map((social, index) => (
-                <motion.button
+                <motion.a
                   key={social.name}
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{
                     duration: 0.5,
                     delay: 0.1 * index,
-                    ease: [0.42, 0, 0.58, 1],
+                    ease: "easeInOut",
                   }}
                   viewport={{ once: true }}
                   whileHover={{
                     scale: 1.2,
                     rotate: 10,
-                    transition: { duration: 0.5, ease: [0.42, 0, 0.58, 1] },
+                    transition: { duration: 0.5, ease: "easeInOut" },
                   }}
                   className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center text-2xl transition-all duration-500 ease-in"
                   aria-label={social.name}
                 >
-                  <Link href={social.link} target="_blank">
-                    {social.icon}
-                  </Link>
-                </motion.button>
+                  {social.icon}
+                </motion.a>
               ))}
             </div>
 
@@ -188,7 +184,7 @@ export default function Footer() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.42, 0, 0.58, 1] }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
           viewport={{ once: true }}
           className="mt-12 pt-8 border-t border-white/20 text-center"
         >
@@ -196,8 +192,14 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} The Redeemed Christian Church of
             God. All rights reserved.
           </p>
-          <p className="text-white/60 text-xs mt-2">
-            Built with love for the Kingdom
+          <p className="text-white/60 text-xs mt-3">
+            Built with love for the Kingdom |
+            <Link
+              href="/portfolio"
+              className="text-amber-300 hover:text-amber-200 transition-colors duration-500 ease-in ml-1"
+            >
+              Built by Tea
+            </Link>
           </p>
         </motion.div>
       </div>

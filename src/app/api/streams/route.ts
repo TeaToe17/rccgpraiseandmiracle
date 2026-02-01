@@ -22,8 +22,8 @@ export async function POST(request: Request) {
   try {
     const { channelType, link, password } = await request.json();
 
-    
-    const ADMIN_PASSWORD = "rccgpm2026";
+
+    const ADMIN_PASSWORD = process.env.NEXT_ADMIN_PASSWORD;
 
     if (password !== ADMIN_PASSWORD) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });

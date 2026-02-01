@@ -192,15 +192,18 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} The Redeemed Christian Church of
             God. All rights reserved.
           </p>
-          <p className="text-white/60 text-xs mt-3">
-            Built with love for the Kingdom |
+          <div className="flex justify-center items-center gap-2 text-white/60 text-xs mt-3">
+            <span>Built with love for the Kingdom</span>
+            <span>|</span>
             <Link
               href="/portfolio"
-              className="text-amber-300 hover:text-amber-200 transition-colors duration-500 ease-in ml-1"
+              className="text-amber-300 hover:text-amber-200 transition-colors duration-500 ease-in"
             >
               Built by Tea
             </Link>
-          </p>
+            <span>|</span>
+            <span>Supported by the Media Team</span>
+          </div>
         </motion.div>
       </div>
     </footer>

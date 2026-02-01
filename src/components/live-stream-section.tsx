@@ -11,7 +11,7 @@ interface StreamChannel {
   link: string;
 }
 
-const ADMIN_PASSWORD = process.env.NEXT_ADMIN_PASSWORD;
+const ADMIN_PASSWORD = "your_admin_password_here";
 
 export default function LiveStreamSection() {
   const [videoChannel, setVideoChannel] = useState<StreamChannel>({
@@ -29,7 +29,7 @@ export default function LiveStreamSection() {
   });
 
   const [isAdminMode, setIsAdminMode] = useState(false);
-  const [adminPassword, setAdminPassword] = useState("");
+  const [adminToken, setAdminToken] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [editingChannel, setEditingChannel] = useState<
     "video" | "audio" | null
@@ -37,6 +37,7 @@ export default function LiveStreamSection() {
   const [newLink, setNewLink] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
 
   // Fetch streams on mount and set up polling
   useEffect(() => {
@@ -57,16 +58,32 @@ export default function LiveStreamSection() {
     }
   };
 
-  const handleAdminLogin = (e: React.FormEvent) => {
+  const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passwordInput === ADMIN_PASSWORD) {
+    try {
+      const response = await fetch("/api/streams", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "login",
+          password: passwordInput,
+        }),
+      });
+
+      if (!response.ok) {
+        setPasswordError("Incorrect password");
+        setPasswordInput("");
+        return;
+      }
+
+      const data = await response.json();
+      setAdminToken(data.token);
       setIsAdminMode(true);
-      setAdminPassword(passwordInput);
       setPasswordError("");
       setPasswordInput("");
-    } else {
-      setPasswordError("Incorrect password");
-      setPasswordInput("");
+    } catch (error) {
+      console.log("[v0] Login error:", error);
+      setPasswordError("Login failed");
     }
   };
 
@@ -76,14 +93,22 @@ export default function LiveStreamSection() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          action: "update",
+          token: adminToken,
           channelType,
           link: newLink.trim(),
-          password: ADMIN_PASSWORD,
         }),
       });
 
       if (!response.ok) {
-        setPasswordError("Failed to update stream");
+        const error = await response.json();
+        if (response.status === 401) {
+          setPasswordError("Session expired, please login again");
+          setIsAdminMode(false);
+          setAdminToken("");
+        } else {
+          setPasswordError("Failed to update stream");
+        }
         return;
       }
 
@@ -175,7 +200,7 @@ export default function LiveStreamSection() {
           </div>
         )}
 
-        {isAdminMode && !adminPassword && (
+        {isAdminMode && !adminToken && (
           <div className="max-w-md mx-auto mb-12 p-6 bg-white rounded-lg shadow-lg">
             <form onSubmit={handleAdminLogin} className="space-y-4">
               <h3 className="text-xl font-bold text-purple-700">Admin Login</h3>
@@ -256,7 +281,7 @@ export default function LiveStreamSection() {
                     )}
                   </div>
 
-                  {isAdminMode && adminPassword && (
+                  {isAdminMode && adminToken && (
                     <button
                       onClick={() => {
                         setEditingChannel("video");
@@ -278,7 +303,7 @@ export default function LiveStreamSection() {
                 </div>
               ) : null}
 
-              {editingChannel === "video" && isAdminMode && adminPassword && (
+              {editingChannel === "video" && isAdminMode && adminToken && (
                 <div className="p-4 bg-purple-50 rounded-lg space-y-3">
                   <label className="block text-sm font-semibold text-purple-700 mb-2">
                     Video Stream Link
@@ -313,7 +338,7 @@ export default function LiveStreamSection() {
               {!videoChannel.link &&
                 !editingChannel &&
                 isAdminMode &&
-                adminPassword && (
+                adminToken && (
                   <button
                     onClick={() => {
                       setEditingChannel("video");
@@ -362,7 +387,7 @@ export default function LiveStreamSection() {
                     </a>
                   </div>
 
-                  {isAdminMode && adminPassword && (
+                  {isAdminMode && adminToken && (
                     <button
                       onClick={() => {
                         setEditingChannel("audio");
@@ -384,7 +409,7 @@ export default function LiveStreamSection() {
                 </div>
               ) : null}
 
-              {editingChannel === "audio" && isAdminMode && adminPassword && (
+              {editingChannel === "audio" && isAdminMode && adminToken && (
                 <div className="p-4 bg-pink-50 rounded-lg space-y-3">
                   <label className="block text-sm font-semibold text-pink-700 mb-2">
                     Audio Stream Link
@@ -419,7 +444,7 @@ export default function LiveStreamSection() {
               {!audioChannel.link &&
                 !editingChannel &&
                 isAdminMode &&
-                adminPassword && (
+                adminToken && (
                   <button
                     onClick={() => {
                       setEditingChannel("audio");
@@ -434,13 +459,14 @@ export default function LiveStreamSection() {
           </div>
         </div>
 
-        {isAdminMode && adminPassword && (
+        {isAdminMode && adminToken && (
           <div className="mt-8 text-center">
             <button
               onClick={() => {
                 setIsAdminMode(false);
-                setAdminPassword("");
+                setAdminToken("");
                 setEditingChannel(null);
+                setPasswordInput("");
               }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors"
             >
